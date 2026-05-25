@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
+//Se 'melhorOpcao' estiver vazia (estado inicial, antes de clicar no botão), 
+  //o componente retorna 'null', fazendo com que nada apareça na tela do usuário
 export default function ResultCard({ melhorOpcao, porcentagem }) {
   if (!melhorOpcao) return null;
 
