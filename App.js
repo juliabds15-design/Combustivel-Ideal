@@ -1,3 +1,4 @@
+//Importações
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, SafeAreaView, StatusBar, Alert } from 'react-native';
 import AppButton from './src/components/AppButton';
@@ -5,23 +6,28 @@ import ResultCard from './src/components/ResultCard';
 import ImageComponent from './src/components/ImageComponent';
 
 export default function App() {
+  //Atribuição dos valores digitados pelo usuário as variáveis
   const [precoEtanol, setPrecoEtanol] = useState('');
   const [precoGasolina, setPrecoGasolina] = useState('');
   const [melhorOpcao, setMelhorOpcao] = useState('');
   const [porcentagem, setPorcentagem] = useState('');
 
+  //Substitui a vírgula por ponto (caso o usuário digite com vírgula) e converte o texto para número decimal
   const calcularVantagem = () => {
     const etanol = parseFloat(precoEtanol.replace(',', '.'));
     const gasolina = parseFloat(precoGasolina.replace(',', '.'));
 
+    //Verifica se os campos estão vazios, se não são números (isNaN) ou se são menores/iguais a zero
     if (isNaN(etanol) || isNaN(gasolina) || etanol <= 0 || gasolina <= 0) {
       Alert.alert('Por favor, digite valores válidos para os combustíveis.');
       return;
     }
 
+    //Calcula a relação de preço e transforma em porcentagem
     const relacao = etanol / gasolina;
     const calculoPorcentagem = (relacao * 100).toFixed(1);
 
+    //Condicional para definir qual o combustível mais vantajoso
     if (relacao < 0.7) {
       setMelhorOpcao('Etanol');
     } else {
@@ -32,15 +38,19 @@ export default function App() {
   };
 
   return (
+    //Garante que o conteúdo não fique escondido sob entalhes (notches) ou barras de navegação do dispositivo
     <SafeAreaView style={styles.container}>
+    {/*Configura a cor de fundo*/}
       <StatusBar barStyle="light-content" backgroundColor="#1e222b" />
       
       <View style={styles.content}>
         <Text style={styles.headerTitle}>ÁLCOOL OU GASOLINA</Text>
         <Text style={styles.headerSubtitle}>Descubra o combustível ideal para o seu bolso</Text>
 
+    {/*Renderiza o componente que contém a imagem da bomba de combustível*/}
         <ImageComponent />
 
+    {/*Bloco do formulário de entrada de dados */}
         <View style={styles.cardForm}>
           <Text style={styles.label}>Digite o preço do Etanol (R$):</Text>
           <TextInput
