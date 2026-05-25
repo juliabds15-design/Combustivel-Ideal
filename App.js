@@ -15,7 +15,7 @@ export default function App() {
     const gasolina = parseFloat(precoGasolina.replace(',', '.'));
 
     if (isNaN(etanol) || isNaN(gasolina) || etanol <= 0 || gasolina <= 0) {
-      Alert.alert('Ops!', 'Por favor, digite valores válidos para os combustíveis.');
+      Alert.alert('Por favor, digite valores válidos para os combustíveis.');
       return;
     }
 
